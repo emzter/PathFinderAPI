@@ -13,11 +13,11 @@ class MessageController extends Controller {
     }
 
     public function getByReceiver($id) {
-        return response()->json(Message::where('reciever', $id));
+        return response()->json(Message::where('reciever', $id)->get());
     }
 
     public function getBySender($id) {
-        return response()->json(Message::where('sender', $id));
+        return response()->json(Message::where('sender', $id)->get());
     }
 
     public function post(Request $request) {
