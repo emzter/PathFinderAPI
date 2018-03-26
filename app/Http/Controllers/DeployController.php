@@ -40,7 +40,7 @@ class DeployController extends Controller {
                 die("Ignoring push to '$branchRef'");
             }
             // ssh into the local server
-            $sshSession = ssh2_connect('localhost', $_ENV['SSH_PORT']);
+            $sshSession = ssh2_connect($_ENV['SITE_DOMAIN'], $_ENV['SSH_PORT']);
             $authSuccess = ssh2_auth_pubkey_file(
                 $sshSession,
                 $_ENV['SSH_USERNAME'],
