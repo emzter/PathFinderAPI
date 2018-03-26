@@ -15,11 +15,9 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('/', function () use ($router) {
+$router->get('key', function () use ($router) {
     return str_random(32);
 });
-
-$router->post('deploy', ['uses' => 'DeployController@deployApp']);
 
 $router->get('messages',  ['uses' => 'MessageController@getAll']);
 $router->get('messages/{id}',  ['uses' => 'MessageController@getOne']);
