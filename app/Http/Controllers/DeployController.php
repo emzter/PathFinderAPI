@@ -1,6 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 define('GITHUB_SECRET', '82JMdZ6MagqnugfBCnsv');
 define('GITHUB_BRANCH', 'master');
 define('SITE_DOMAIN', 'pathfinder.in.th');
