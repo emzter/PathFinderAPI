@@ -3,7 +3,6 @@ namespace App\Http\Controllers;
 
 define('GITHUB_SECRET', '82JMdZ6MagqnugfBCnsv');
 define('GITHUB_BRANCH', 'master');
-define('EMAIL_RECIPIENT', 'misterzemz@outlook.com');
 define('SITE_DOMAIN', 'pathfinder.in.th');
 define('SSH_PORT', 22);
 define('SSH_USERNAME', 'cp525119');
@@ -112,13 +111,13 @@ class DeployController extends Controller {
             $mail->SMTPSecure = 'tls';
             $mail->Port = $_ENV['SMTP_PORT'];
 
-            $mail->setFrom($_ENV['SMTP_USER'], 'PathFinder');
-            $mail->addAddress(EMAIL_RECIPIENT);
+            $mail->setFrom($_ENV['SMTP_USER'], 'PathFinderAPI');
+            $mail->addAddress($_ENV['ADMIN_EMAIL']);
 
             if ($success) {
-                $mail->Subject = '['.SITE_DOMAIN.'] Deploy failure';
+                $mail->Subject = '['.SITE_DOMAIN.' API] Deploy failure';
             } else {
-                $mail->Subject = '['.SITE_DOMAIN.'] Deploy failure';
+                $mail->Subject = '['.SITE_DOMAIN.' API] Deploy failure';
             }
 
             $mail->Body = $message;
