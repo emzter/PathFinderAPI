@@ -21,6 +21,14 @@ class MessageController extends Controller {
     }
 
     public function post(Request $request) {
+        $this->validate($request, [
+            'title' => 'required',
+            'text' => 'required',
+            'sender' => 'required',
+            'reciever' => 'required',
+            'type' => 'required'
+        ]);
+
         $message = Message::create($request->all());
         return response()->json($message, 201);
     }
