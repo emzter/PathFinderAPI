@@ -21,6 +21,8 @@ $router->get('/key', function () use ($router) {
 
 $router->get('messages',  ['uses' => 'MessageController@getAll']);
 $router->get('messages/{id}',  ['uses' => 'MessageController@getOne']);
+$router->get('messages/inbox/{id}',  ['uses' => 'MessageController@getByReceiver']);
+$router->get('messages/sent/{id}',  ['uses' => 'MessageController@getBySender']);
 $router->post('messages',  ['uses' => 'MessageController@post']);
 $router->delete('messages/{id}',  ['uses' => 'MessageController@delete']);
 $router->put('messages/{id}',  ['uses' => 'MessageController@put']);

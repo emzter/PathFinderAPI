@@ -12,6 +12,14 @@ class MessageController extends Controller {
         return response()->json(Message::find($id));
     }
 
+    public function getByReceiver($id) {
+        return response()->json(Message::where('reciever', $id));
+    }
+
+    public function getBySender($id) {
+        return response()->json(Message::where('sender', $id));
+    }
+
     public function post(Request $request) {
         $message = Message::create($request->all());
         return response()->json($message, 201);
