@@ -26,7 +26,7 @@ $router->put('jobs/{id}',  ['uses' => 'JobController@update']);
 $router->delete('jobs/{id}',  ['uses' => 'JobController@delete']);
 
 $router->get('categories',  ['uses' => 'CategoryController@getAll']);
-// $router->get('categories/{id}',  ['uses' => 'CategoryController@getOne']);
+$router->get('categories/{id}',  ['uses' => 'CategoryController@getOne']);
 $router->get('categories/{id}/jobs',  ['uses' => 'CategoryController@getJobByCategory']);
 
 $router->get('messages',  ['uses' => 'MessageController@getAll']);
