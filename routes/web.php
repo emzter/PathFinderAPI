@@ -43,3 +43,11 @@ $router->get('users/{id}/details',  ['uses' => 'UserController@getDetail']);
 $router->delete('users/{id}',  ['uses' => 'UserController@delete']);
 $router->put('users/{id}',  ['uses' => 'UserController@update']);
 // $router->put('users/{id}/details',  ['uses' => 'UserController@putDetails']);
+
+$router->get('applications', ['uses' => 'ApplicationController@getAll']);
+$router->get('applications/{id}', ['uses' => 'ApplicationController@getOne']);
+$router->get('applications/job/{id}', ['uses' => 'ApplicationController@getByJobId']);
+$router->post('applications', ['uses' => 'ApplicationController@post']);
+$router->put('applications/{id}', ['uses' => 'ApplicationController@update']);
+$router->put('applications/{id}/status', ['uses' => 'ApplicationController@updateStatus']);
+$router->delete('applications/{id}', ['uses' => 'ApplicationController@delete']);
