@@ -4,6 +4,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class PersonalDetail extends Model {
     protected $table = 'personal_details';
+    public $timestamps = false;
+    
     protected $fillable = [
         'first_name',
         'last_name',

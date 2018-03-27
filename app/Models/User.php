@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Model {
     protected $fillable = [
@@ -21,19 +22,7 @@ class User extends Model {
     ];
 
     public function setPasswordAttribute($pass){
-        $salt = sha1(md5($pass));
-        $newpass = md5($pass.$salt);
-        $this->attributes['password'] = $newpass;
-    }
-
-    public function check($pass) {
-        $salt = sha1(md5($pass));
-        $newpass = md5($pass.$salt);
-        if ($this->attributes['password'] === $newpass) {
-            return true;
-        } else {
-            return false;
-        }
+        $this->attributes['password'] = Hash::make($pass);
     }
 
     public function details() {

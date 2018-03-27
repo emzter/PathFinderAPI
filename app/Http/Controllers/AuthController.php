@@ -14,7 +14,7 @@ class AuthController extends Controller {
 
         $user = User::whereEmail($request->input('email'))->first();
         if ($user !== null) {
-            if ($user->check($request->input('password'))) {
+            if (Hash::check($request->input('password'), $user->password)) {
                 return response()->json($user, 200);
             } else {
                 return response()->json($request, 401);
@@ -32,15 +32,30 @@ class AuthController extends Controller {
             'lastname' => 'required',
         ]);
 
-        $user = new User();
-        $user->email = $request->input('email');
-        $user->password = Hash::make($request->input('password'));
-        $user->save();
-
-        $detail = new PersonalDetail();
-        $detail->first_name = $request->input('firstname');
-        $detail->last_name = $request->input('lastname');
-        $detail->user_id = $user->id;
-        $detail->save();
+        if (!User::whereEmail($request->input('email'))->exists()) {
+            $user = new User();
+            $user->email = $request->input('email');
+            $user->password = $request->input('password');
+            
+            if($user->save()) {
+                $detail = new PersonalDetail();
+                $detail->first_name = $request->input('firstname');
+                $detail->last_name = $request->input('lastname');
+                $detail->user_id = $user->id;
+                if ($detail->save()) {
+                    return response()->json($user, 201);
+                } else {
+                    return response()->json([
+                        'error' => 'Failed to save personals details'
+                    ], 500);
+                }
+            } else {
+                return response()->json([
+                    'error' => 'Failed to save users'
+                ], 500);
+            }
+        } else {
+            return response()->json($request, 400);
+        }
     }
 }
